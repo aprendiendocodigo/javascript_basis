@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi primer archivo para JS</title>
+</head>
+<body>
+  <h1>Mi encabezado</h1>
+  <script type="text/javascript">
+
+    //Modificando encabezado
+    var encabezado = document.getElementsByTagName("h1")[0];
+    encabezado.innerHTML ="Encabezado Cambiado";
+
+    //Ejemplo de variables
+    var nombre = "Richard";
+    var edad = 27;
+
+    //Arreglos
+    var lenguajes = ["ruby", "php", "javascript"];
+    lenguajes.forEach(function(elemento){
+      console.log(elemento);
+    });
+
+    for (var i = 0; i < 10 ; i++) {
+      console.log(i);
+    };
+
+
+    //Objetos (json)
+    var persona = {
+      nombre: "Richard",
+      apellido: "Barrera",
+      lenguajes: ["ruby", "php", "javascript"]
+    }
+
+    console.log("El nombre en el objeto es: " + persona.nombre);
+    console.log("El apellido en el objeto es: " + persona.apellido);
+    console.log("Los lenguajes en el objeto es: " + persona.lenguajes);
+
+    //Namespaces
+    var MYAPP = MYAPP || {};
+    MYAPP.objetos = {
+      nombre: "Richard",
+      apellido: "Barrera",
+      lenguajes: ["ruby", "php", "javascript"]
+    };
+
+    //if, while, for
+    if(true){
+      console.log("Esto es verdad");
+    }else{
+      console.log("Esto es falso");
+    }
+
+    var contador = 0;
+    while(contador < 10){
+      console.log(contador);
+      contador++;
+    }
+
+    for (var i = 0; i < 10 ; i++) {
+      console.log(i);
+    };
+
+    //Functions
+    function hola1(nombre){
+      console.log("hola " + nombre);
+    }
+
+    var hola2 = function(nombre){
+      console.log("hola " + nombre);
+      return "hola " + nombre;
+    }
+
+    var hola3 = function hola4(nombre){
+      console.log("hola " + nombre);
+    }
+
+    //Llamadas a las funciones
+    hola1("Richard");
+    hola2("Richard 2");
+    hola3("Richard 3");
+    //No puede ejecutar hola4 ya que pertenece al scope de hola3
+    //hola4("Richard 4"); //Esto marcara error
+
+    //Callbacks
+
+    // setInterval(function(){
+    //   console.log("Este mensaje se está ejecutando cada 2 segundos, Magia!");
+    // }, 2000);
+
+    //Closures
+
+    function agrega_sin_closures(){
+      console.log("agrega_sin_closures");
+      var counter = 0;
+      return counter+1;
+    }
+
+    var counter2 = 0
+    function agrega_diferente(){
+      console.log("agrega_diferente");
+      return counter2++;
+    }
+
+    var agrega_con_closure = (function(){
+      console.log("agrega_con_closure");
+      var counter3 = 0;
+      return function(){
+        return ++counter3;
+      }
+    })();
+
+    agrega_sin_closures();
+    agrega_sin_closures();
+    agrega_sin_closures();
+    //Deberia de ser 3 pero no por el scope
+
+    agrega_diferente();
+    agrega_diferente();
+    agrega_diferente();
+    //El valor es 3 pero counter2 puede ser modificado desde cualquier lado
+
+    agrega_con_closure();
+    agrega_con_closure();
+    agrega_con_closure();
+    //Con los closures puedes retornar funciones y sigues teniendo acceso a las variables del scope de la funcion
+
+
+    //
+
+    var MYAPP = MYAPP || {};
+    MYAPP.personas = {};
+    MYAPP.personas.richard = {
+      nombre: "Richard",
+      apellido: "Barrera",
+      anio_nacimiento: new Date("12-15-1987"),
+      lenguajes: ["php", "javascript", "ruby"],
+      anios_actual: function(){
+        var edad_miliseconds = (new Date()) - this.anio_nacimiento.getTime();
+        var nueva_edad_miliseconds = new Date(edad_miliseconds);
+        return Math.abs(nueva_edad_miliseconds.getFullYear() - 1970)
+      }
+    }
+  </script>
+</body>
+</html>
